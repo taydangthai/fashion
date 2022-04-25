@@ -1,0 +1,77 @@
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="simple-text logo-mini">
+      <div class="logo-img " >
+        <img  src="./assets/img/angular2-logo-white.png" style="max-width: 25%;"/>
+      </div>
+    </a>
+<!--    <a class="simple-text logo-normal">-->
+<!--      Angular Pro-->
+<!--    </a>-->
+
+    <!-- Collapse -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" routerLinkActive="active" *ngFor="let menuItem of menuItems" class="nav-item">
+          <a class="nav-link waves-effect" [routerLink]="[menuItem.path]">{{menuItem.title}}
+            <span class="sr-only">{{menuItem.title}}</span>
+          </a>
+        </li>
+      </ul>
+
+      <form class="form-inline">
+        <div class="md-form my-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </div>
+      </form>
+
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link waves-effect" [routerLink]="'/home/giohang'" >
+            <i class="fas fa-shopping-cart" style="text-align: center"></i>
+            <span class="clearfix d-none d-sm-inline-block"> -> Cart </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" >
+            <i class="far fa-user"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" [routerLink]="'/login'">
+            <i class="fas fa-sign-in-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</nav>

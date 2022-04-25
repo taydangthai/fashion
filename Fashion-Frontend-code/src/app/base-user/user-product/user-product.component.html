@@ -1,0 +1,125 @@
+<main>
+  <div class="container">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5"  style="background: #42caff">
+
+      <!-- Navbar brand -->
+      <span class="navbar-brand">Categories:</span>
+
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto" >
+          <li class="nav-item active" *ngFor="let item of category">
+            <a class="nav-link" (click)="findByCategory(item.categoryName)">{{item.categoryName}}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+        </ul>
+        <!-- Links -->
+        <form class="form-inline">
+          <div class="md-form my-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          </div>
+        </form>
+      </div>
+      <!-- Collapsible content -->
+    </nav>
+    <!--/.Navbar-->
+
+    <!--Section: Products v.3-->
+    <section class="text-center mb-4">
+      <!--Grid row-->
+      <div class="row wow fadeIn" >
+        <div class="col-lg-3 col-md-6 mb-4 " *ngFor="let prod of productPage"  >
+          <div class="card" id="main-container">
+        <app-card-product [product]="prod" productId="{{prod.productId}}" ></app-card-product>
+
+          <button class="btn btn-round bg-info" (click)="onOpenModal(prod, 'add')" data-original-title="add" type="button" rel="tooltip" title=""> Thêm  vào giỏ hàng</button>
+          </div>
+        </div>
+      </div>
+      <!--Grid row-->
+
+
+    </section>
+    <!--Section: Products v.3-->
+
+    <!--Pagination-->
+    <nav aria-label="...">
+      <ul class="pagination justify-content-end mb-0">
+        <li class="page-item">
+          <a class="page-link" tabindex="-1"  (click)="firstPage()">
+            <i class="fas fa-angle-double-left"></i>
+            <span class="sr-only">FistPage</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link"  tabindex="-1" (click)="previousPage()">
+            <i class="fas fa-angle-left"></i>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item " *ngFor="let item of pageItem; let i=index;">
+          <button class="page-link" [ngClass]="{actives:i+1===page}"
+                  (click)="setPage(i+1)"
+          >{{i+1}}</button>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="nextPage()">
+            <i class="fas fa-angle-right"></i>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" tabindex="-1"  (click)="lastPage()">
+            <i class="fas fa-angle-double-right"></i>
+            <span class="sr-only">LastPage</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!--Pagination-->
+    <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateEmployeeModalLabel">Thêm vào giỏ hàng</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form  [formGroup]="form" (ngSubmit)="form.valid && onSubmit()" novalidate>
+              <div class="form-group">
+                <label >Số lượng</label>
+                <input type="text" class="form-control" formControlName="quantity"
+                       name="quantity"  aria-describedby="emailHelp" placeholder="nhập số lượng" required >
+                <select class="example-full-width" formControlName="color" >
+                  <option value="null">Chọn màu</option>
+                  <option *ngFor="let color of listColor" value="{{color.colorId}}">{{color.colorName}}</option>
+                </select>
+                <select class="example-full-width" formControlName="size" >
+                  <option value="null">Chọn kích cỡ</option>
+                  <option *ngFor="let size of listSize" value="{{size.sizeId}}">{{size.sizeName}}</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                <input type="submit" (click)="addTocart()" data-dismiss="modal" class="btn btn-primary" value="Thêm" >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

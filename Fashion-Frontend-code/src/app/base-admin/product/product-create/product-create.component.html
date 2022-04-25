@@ -1,0 +1,76 @@
+<div mat-dialog-content>Thêm Mới Sản Phẩm
+</div>
+
+<div class="table cdk-global-scrollblock">
+<form class="example-full-width" [formGroup]="productForm" (ngSubmit)="productForm.valid && onSubmit()" novalidate>
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Tên Sản Phẩm</mat-label>
+      <input matInput  formControlName="name">
+    </mat-form-field>
+    <div class="form-group" *ngIf="productForm.get('name').invalid && productForm.get('name').touched"
+         style="color: red">
+      Product name must be at least 1 characters
+    </div>
+  </div>
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Giá Sản Phẩm</mat-label>
+      <input matInput formControlName="price">
+    </mat-form-field>
+    <div class="form-group" *ngIf="productForm.get('price').invalid && productForm.get('price').touched"
+         style="color: red">
+      Price is greater than or equal to zero
+    </div>
+  </div>
+  <div class="form-group">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Số Lượng Sản Phẩm</mat-label>
+      <input matInput  formControlName="quantity">
+    </mat-form-field>
+    <div class="form-group" *ngIf="productForm.get('quantity').invalid && productForm.get('quantity').touched"
+         style="color: red">
+      Quantity is greater than or equal to zero
+    </div>
+  </div>
+  <div class="form-group">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Mô Tả</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+    <div class="form-group" *ngIf="productForm.get('description').invalid && productForm.get('description').touched"
+         style="color: red">
+      Description is required
+    </div>
+  </div>
+  <div class="form-group">
+    <mat-label>Danh Mục</mat-label>
+    <select class="example-full-width" appearance="fill" (change)="addCategory(addCt.value)" #addCt>
+      <option value="null">Chọn Danh Mục</option>
+      <option *ngFor="let a of categoryList" value="{{a.categoryId}}">{{a.categoryName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <mat-label>Nhà Cung Cấp</mat-label>
+    <select class="example-full-width" appearance="fill" (change)="addSupplier(addClient.value)" #addClient>
+      <option value="null">Chọn Nhà Cung Cấp</option>
+      <option *ngFor="let supplier of supplierList" value="{{supplier.supplierId}}">{{supplier.supplierName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <mat-label>Chọn Hình Ảnh -></mat-label>
+    <button class="btn-default"><input type="file" class="form-control" accept="image/*" (change)="onSelectFile($event)" multiple>click</button>
+  </div>
+  <div class="form-group" style="height: 100px">
+    <div class="image-preview" *ngIf="previewUrl">
+      <div class="float-left" *ngFor="let preview of previewUrl">
+        <img [src]="preview" height="100"/><span>x</span>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button type="submit" mat-raised-button class="btn btn-round btn-success" [mat-dialog-close]="true" >Lưu</button>
+    <button mat-raised-button class="btn btn-round btn-default" [mat-dialog-close]="true">Huỷ</button>
+  </div>
+</form>
+</div>

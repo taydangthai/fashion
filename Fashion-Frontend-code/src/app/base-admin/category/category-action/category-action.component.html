@@ -1,0 +1,209 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content" id="main-container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="modal-header">
+          <h4 class="card-title">Danh Mục</h4>
+          <button (click)="onOpenModal(null, 'add')" type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="add">
+              <i class="now-ui-icons ui-1_simple-add"></i></button>
+        </div>
+        <div class="card-body">
+          <div class="alert alert">
+            <div class="card-body">
+              <div class="table-hover"> <!--table-responsive-->
+                <table class="table">
+                  <thead class=" text-primary">
+                  <!--                  <th>Check</th>-->
+                  <th>Mã</th>
+                  <th>Tên Danh Mục</th>
+                  <th class="text-right">Công cụ</th>
+                  </thead>
+                  <tbody style="color: black">
+                  <tr *ngFor="let category of categoryClass">
+                    <td>{{category.categoryId}}</td>
+                    <td>{{category.categoryName}}</td>
+                    <td class="td-actions text-right">
+                      <button (click)="onOpenModal(category, 'edit')" type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </button>
+                      <button (click)="onOpenModal(category, 'delete')" type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="modal-header">
+          <h4 class="card-title">Kích Thước Sản Phẩm</h4>
+          <button (click)="onOpenModal1(null, 'add')" type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="add">
+              <i class="now-ui-icons ui-1_simple-add"></i></button>
+        </div>
+        <div class="card-body">
+          <div class="alert alert">
+            <div class="card-body">
+              <div class="table-hover"> <!--table-responsive-->
+                <table class="table">
+                  <thead class=" text-primary">
+                  <!--                  <th>Check</th>-->
+                  <th>Mã</th>
+                  <th>Kích Cỡ</th>
+                  <th class="text-right">Công cụ</th>
+                  </thead>
+                  <tbody style="color: black">
+                  <tr *ngFor="let size of sizeClass">
+                    <td>{{size.sizeId}}</td>
+                    <td>{{size.sizeName}}</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </button>
+                      <button (click)="onOpenModal1(size, 'delete')" type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--first category-->
+<!--add category-->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addEmployeeModalLabel">Thêm Mới Danh Mục</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddCategory(addForm)">
+          <div class="form-group">
+            <label for="categoryName">Tên Danh Mục</label>
+            <input type="text" ngModel name="categoryName" class="form-control" id="categoryName" placeholder="mtp" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="add-category-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--edit category-->
+<div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateEmployeeModalLabel">Chỉnh Sửa Danh Mục {{editCategory?.categoryName}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="categoryName">Tên Danh Mục</label>
+            <input type="text" class="form-control"
+                 name="categoryName"  aria-describedby="emailHelp" placeholder="Name" required #name>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+            <button (click)="onUpdateCategory(editCategory,name.value)" id="edit-category-form" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--delete category-->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Xoá Danh Mục</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn xoá danh mục {{deleteCategory?.categoryName}}?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeleteCategory(deleteCategory?.categoryId)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end category-->
+
+<!--first size-->
+<!--add size-->
+<div class="modal fade" id="addEmployeeModal1" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addEmployeeModalLabel1">Thêm Mới Kích Cỡ Sản Phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm1="ngForm" (ngSubmit)="onAddSize(addForm1)">
+          <div class="form-group">
+            <label for="sizeName">Kích Cỡ Sản Phẩm</label>
+            <input type="text" ngModel name="sizeName" class="form-control" id="sizeName" placeholder="..." required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="add-size-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--delete size-->
+<div class="modal fade" id="deleteEmployeeModal1" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel1">Xoá Danh Mục</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn xoá kích cỡ {{deleteSize?.sizeName}}?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeleteSize(deleteSize?.sizeId)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end size-->

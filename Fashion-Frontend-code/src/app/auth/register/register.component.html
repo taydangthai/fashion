@@ -1,0 +1,81 @@
+<div class="container-fluid ">
+  <div class="row main-content bg-success text-center">
+    <div class="col-md-4 text-center company__info">
+      <span class="company__logo"><h2><span> <i class="fab fa-angular"></i></span></h2></span>
+      <h4 class="company_title">Your Company Logo</h4>
+    </div>
+    <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+      <div class="container-fluid">
+        <div class="row-cols-auto">
+          <h2>Đăng Ký Tài Khoản</h2>
+        </div>
+        <div class="row-cols-auto">
+          <form control="" class="form-group" [formGroup]="registerForm">
+            <div class="row-cols-auto">
+              <input type="text" name="name" id="name" formControlName="name"  class="form__input form-control" placeholder="Họ và Tên">
+              <div class="alert alert-warning" role="alert"
+                   *ngIf="registerForm.get('name').invalid &&registerForm.get('name').touched">
+                Tên không hợp lệ (phải dài hơn 2 và nhỏ hơn 100 ký tự)
+              </div>
+            </div>
+            <div class="row-cols-auto">
+              <input type="text" name="username" formControlName="username" id="username" class="form__input form-control" placeholder="Tên Đăng Nhập">
+              <div class="alert alert-warning" role="alert"
+                   *ngIf="registerForm.get('username').invalid &&registerForm.get('username').touched">
+                Tên người dùng không hợp lệ (phải dài hơn 2 và nhỏ hơn 50 ký tự)
+              </div>
+            </div>
+            <div class="row-cols-auto">
+              <input type="text" name="email" formControlName="email" id="email" class="form__input form-control" placeholder="Địa Chỉ Email">
+              <div class="alert alert-warning" role="alert"
+                   *ngIf="registerForm.get('email').invalid &&registerForm.get('email').touched">
+                Email không hợp lệ (phải nhỏ hơn 50 ký tự bao gồm @example.com)
+              </div>
+            </div>
+            <div class="row-cols-auto">
+              <input type="text" name="phone" formControlName="phone" id="phone" class="form__input form-control" placeholder="Số Điện Thoại">
+              <div class="alert alert-warning" role="alert" *ngIf="registerForm.get('phone').invalid && registerForm.get('phone').touched">
+                <span *ngIf="registerForm.get('phone').hasError('required')">Vui lòng nhập số điện thoại!</span>
+                <span *ngIf="registerForm.get('phone').hasError('pattern')">Điện thoại phải bắt đầu bằng +84 hoặc 0, sau đó là 9 hoặc 10 chữ số.</span>
+              </div>
+            </div>
+            <div class="row-cols-auto">
+              <input type="text" name="address" formControlName="address" id="address" class="form__input form-control" placeholder="Địa Chỉ">
+              <div class="alert alert-warning" role="alert"
+                   *ngIf="registerForm.get('address').invalid &&registerForm.get('address').touched">
+                Địa chỉ không hợp lệ (phải nhỏ hơn 100 ký tự)
+              </div>
+            </div>
+            <div class="row-cols-auto">
+              <input type="password" name="password"  formControlName="password" #password id="password" class="form__input form-control" placeholder="Mật Khẩu">
+              <div class="alert alert-warning" role="alert"
+                   *ngIf="registerForm.get('password').invalid &&registerForm.get('password').touched">
+                Mật khẩu không hợp lệ (phải dài hơn 6 và nhỏ hơn 100 ký tự)
+              </div>
+            </div>
+            <div class="row-cols-auto">
+              <input type="password" name="confirmPassword" formControlName="confirmPassword" #ch id="confirmPassword" class="form__input form-control" placeholder="Nhập Lại Mật Khẩu">
+              <div class="alert alert-warning" role="alert"
+                   *ngIf="ch.value !='' && ch.value!= password.value || registerForm.get('confirmPassword').invalid && registerForm.get('confirmPassword').touched">
+                Mật khẩu không giống nhau, vui lòng thử lại một lần nữa!
+              </div>
+            </div>
+            <div class="row-cols-auto">
+              <button type="submit" value="Đăng Ký" class="btn" (click)="register()"> Đăng Ký</button>
+              <div *ngIf="isSignUpFailed" class="alert alert-warning">
+                Đặng Ký Thất Bại<br/>{{errorMessage}}
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row-cols-auto">
+          <p>Bạn đã có tài khoản <a routerLink="/login" routerLinkActive="active">Đăng Nhập Tại Đây</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<div class="container-fluid text-center footer">
+  <p>Coded with &hearts; by Tây <a routerLink="/home" routerLinkActive="active"> home</a></p>
+</div>

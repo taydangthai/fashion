@@ -1,0 +1,119 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Chỉnh Sửa Sản Phẩm</h5>
+        </div>
+        <div class="card-body">
+          <form name="form"
+                [formGroup]="productForm"
+                (ngSubmit)="productForm.valid && onSubmit()"
+                novalidate>
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Product name</label>
+                  <input type="text" class="form-control" formControlName="name"/>
+                  <div class="alert-danger" *ngIf="productForm.get('name').invalid && productForm.get('name').touched"
+                       style="color: red">
+                    Product name must be at least 1 characters
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Price</label>
+                  <input type="text" class="form-control" placeholder="Username" formControlName="price">
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label for="email">Quantity</label>
+                  <input name="email" id="email" type="number" class="form-control" formControlName="quantity">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Category</label><br/>
+                  <select class="example-full-width" appearance="fill" (change)="addCategory(addCt.value)" #addCt>
+                    <option value="null">Category</option>
+                    <option *ngFor="let a of categoryList" value="{{a.categoryId}}">{{a.categoryName}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Supplier</label><br/>
+                  <select class="example-full-width" appearance="fill" (change)="addSupplier(addClient.value)" #addClient>
+                    <option value="null">Chọn Nhà Cung Cấp</option>
+                    <option *ngFor="let supplier of supplierList" value="{{supplier.supplierId}}">{{supplier.supplierName}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                </div>
+              </div>
+            </div>
+<!--            <div class="row">-->
+<!--              <div class="col-md-4 pr-1">-->
+<!--                <div class="form-group">-->
+<!--                  <label>City</label>-->
+<!--                  <input type="text" class="form-control" placeholder="City" value="Mike">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 px-1">-->
+<!--                <div class="form-group">-->
+<!--                  <label>Country</label>-->
+<!--                  <input type="text" class="form-control" placeholder="Country" value="Andrew">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 pl-1">-->
+<!--                <div class="form-group">-->
+<!--                  <label>Postal Code</label>-->
+<!--                  <input type="number" class="form-control" placeholder="ZIP Code">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" formControlName="description"></textarea>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group" align="center">
+                  <button type="button" id="add-size-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary"  >Save changes</button>
+                </div>
+
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 card">
+      <ul *ngFor="let item of listpicture ;let i=index;" class="li">
+        <li>
+      <input type="checkbox" [id]="i" class="hidenCheckbox"/>
+      <label [for]="i"><img  [src]="item.src" width="100px"></label></li></ul></div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content" id="main-container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="modal-header">
+          <h4 class="card-title">Nhà Cung Cấp</h4>
+          <button (click)="onOpenModal(null, 'add')" type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="add">
+            <i class="now-ui-icons ui-1_simple-add"></i></button>
+        </div>
+        <div class="card-body">
+          <div class="alert alert">
+            <div class="card-body">
+              <div class="table-hover"> <!--table-responsive-->
+                <table class="table">
+                  <thead class=" text-primary">
+                  <!--                  <th>Check</th>-->
+                  <th>Mã</th>
+                  <th>Tên Nhà Cung Cấp</th>
+                  <th class="text-right">Công cụ</th>
+                  </thead>
+                  <tbody style="color: black">
+                  <tr *ngFor="let supplier of supplierClass">
+                    <td>{{supplier.supplierId}}</td>
+                    <td>{{supplier.supplierName}}</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                        <i class="now-ui-icons ui-2_settings-90"></i>
+                      </button>
+                      <button (click)="onOpenModal(supplier, 'delete')" type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+          <div class="card">
+            <div class="modal-header">
+              <h4 class="card-title">Màu Sắc Sản Phẩm</h4>
+              <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="add">
+                  <i class="now-ui-icons ui-1_simple-add"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="alert alert">
+                <div class="card-body">
+                  <div class="table-hover"> <!--table-responsive-->
+                    <table class="table">
+                      <thead class=" text-primary">
+                      <th>Mã</th>
+                      <th>Màu sắc</th>
+                      <th class="text-right">Công cụ</th>
+                      </thead>
+                      <tbody style="color: black">
+                      <tr *ngFor="let color of colorsClass">
+                        <td>{{color.colorId}}</td>
+                        <td>{{color.colorName}}</td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                          </button>
+                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+<!--first supplier-->
+<!--add supplier-->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addEmployeeModalLabel">Thêm Mới Nhà Cung Cấp</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addFormS="ngForm" (ngSubmit)="onAddSupplier(addFormS)">
+          <div class="form-group">
+            <label for="supplierName">Tên Nhà Cung Cấp</label>
+            <input type="text" ngModel name="supplierName" class="form-control" id="supplierName" placeholder="mtp" required>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="add-supplier-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--delete supplier-->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Xoá Nhà Cung Cấp</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có muốn xoá nhà cung cấp {{deleteSupplier?.supplierName}}?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeleteSupplier(deleteSupplier?.supplierId)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

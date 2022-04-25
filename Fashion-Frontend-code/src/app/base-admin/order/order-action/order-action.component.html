@@ -1,0 +1,79 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <div class="d-flex justify-content-center">
+      <div class="row">
+        <form>
+          <div class="input-group no-border">
+            <input type="text" value="" class="form-control" placeholder="Search...">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <i class="now-ui-icons ui-1_zoom-bold"></i>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <h2 class="title">Notifications</h2>
+  </div>
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Danh Sách Đặt Hàng</h4>
+
+        </div>
+        <div class="card-body">
+          <div class="table-hover">
+            <table class="table">
+              <thead class=" text-primary">
+              <th>Mã Đặt Hàng</th>
+              <th>Người Đặt Hàng</th>
+              <th>Tổng giá tiền</th>
+              <th>Ngày Đặt Hàng</th>
+              <th>Số Điện thoại</th>
+              <th>Địa chỉ </th>
+<!--              <th>Phương Thức Thanh Toán</th>-->
+              <th>Trạng Thái</th>
+<!--              <th>Change status</th>-->
+              <th class="text-right">Công cụ</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let order of orderList" class="table-bordered">
+                <td>{{order?.orderId}}</td>
+                <td>{{order?.user?.name}}</td>
+                <td>{{order?.total | currency: 'VND'}}</td>
+                <td>{{order?.dateTime | date: 'dd/MM/yyyy | hh:mm:ss'}}</td>
+                <td>{{order?.phoneOrder}}</td>
+                <td>{{order?.deliveryAddress}}</td>
+<!--                <td>{{order.payment.paymentName}}</td>-->
+                <td>{{order?.status}}</td>
+<!--                <td>-->
+<!--                  <div *ngIf="order.status=='order'">-->
+<!--                    <input class="btn btn-info btn-block" value="Accept" (click)="changeToProcessing(order.orderId)">-->
+<!--                  </div>-->
+<!--                  <div *ngIf="order.status=='processing'">-->
+<!--                    <input class="btn btn-success btn-block" value="Done" (click)="changeToDone(order.orderId)">-->
+<!--                  </div>-->
+<!--                  <div *ngIf="order.status=='Cancel'">-->
+<!--                    <button class="btn btn-danger" (click)="deleteOrder(order.orderId)">Delete</button>-->
+<!--                  </div>-->
+<!--                </td>-->
+
+                <td class="td-actions text-right">
+                  <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Show"><i class="now-ui-icons ui-1_zoom-bold"></i></button>
+                  <button  type="button" rel="tooltip" data-toggle="modal" data-target="#edit" title="" class="btn btn-success btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task"><i class="now-ui-icons ui-2_settings-90"></i></button>
+                  <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+                </td>
+
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
